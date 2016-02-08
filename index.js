@@ -4,7 +4,7 @@ var path = require( "path" );
 
 module.exports = function( file, opts ) {
 	opts = opts || {};
-	var env = opts.env || nunjucks.env || new nunjucks.Environment( [], { autoescape : false } );
+	var env = opts.env || nunjucks.env || new nunjucks.Environment( [], { throwOnUndefined : false, autoescape : false } );
 	var extension = opts.extension || ['.nunj'];
 
 	if ( !(extension instanceof Array) ) extension = [extension];
@@ -28,7 +28,7 @@ module.exports = function( file, opts ) {
 		var nunjucksCompiledStr;
 
 		try {
-			nunjucksCompiledStr = nunjucks.compiler.compile( data, env.asyncFilters, env.extensionsList );
+			nunjucksCompiledStr = nunjucks.compiler.compile( data, env.asyncFilters, env.extensionsList, null, { throwOnUndefined : false } );
 		} catch( err ) {
 			this.queue( null );
 			return this.emit( 'error', err );
