@@ -4,7 +4,7 @@ var path = require( "path" );
 
 module.exports = function( file, opts ) {
 	opts = opts || {};
-	var env = opts.env || nunjucks.env || new nunjucks.Environment();
+	var env = opts.env || nunjucks.env || new nunjucks.Environment( [], { autoescape : false } );
 	var extension = opts.extension || ['.nunj'];
 
 	if ( !(extension instanceof Array) ) extension = [extension];
@@ -23,7 +23,7 @@ module.exports = function( file, opts ) {
 		var compiledTemplate = '';
 
 		compiledTemplate += 'var nunjucks = require( "nunjucks" );\n';
-		compiledTemplate += 'var env = nunjucks.env || new nunjucks.Environment();\n';
+		compiledTemplate += 'var env = nunjucks.env || new nunjucks.Environment( [], { autoescape : false } );\n';
 
 		var nunjucksCompiledStr;
 
